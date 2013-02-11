@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>PhoneGap Android App</title>
+		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		var showMessageBox = function() {
+		navigator.notification.alert("Hello World of PhoneGap");
+		document.addEventListener("menubutton", onMenuKeyDown, false);
+		}
+		function onMenuKeyDown() {
+		navigator.notification.alert("Hello World of PhoneGap");
+		}
+		function init(){
+		document.addEventListener("deviceready", showMessageBox, true);
+		}
+		</script>
+	</head>
+	<body onload="init();">
+
+		<header>
+			<form id="myForm" action="" type="POST">
+				<input type="text" name="vare" placeholder="Tilføj..." />
+			</form>
+		</header>
+		<div id="wrapper">
+			<div id="main-content">
+ 
+			<script>
+				$(document).ready(function() {
+					$("#myForm").submit(function(e){
+						e.preventDefault();
+						$.ajax({
+							url: "http://9l.dk/zhopz/",
+							data: $('#myForm').serialize() +'&callback=?&add',
+							type: 'POST'
+						});
+					});
+				});
+
+				$.getJSON("http://9l.dk/zhopz/json.php?cats&callback=?", function(data) {
+					info = data.items;
+					$.each(info, function(index, employee) {
+					    $('#dataload').append('<li><a href="employeedetails.html?id=' + info.id + '">' +
+						'<span class="ui-li-count">' + employee.catname + '</span></a></li>');
+					    });
+					    $('#dataload').listview('refresh');
+				});
+			</script>
+
+			<div id="dataload"></div>
+
+
+			</div>
+		</div>
+
+		<footer>
+		</footer>
+
+	</body>
+</html>
